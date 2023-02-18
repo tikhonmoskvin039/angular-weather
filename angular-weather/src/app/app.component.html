@@ -1,0 +1,161 @@
+<!-- <div class="container">
+  <div class="upper-data">
+    <img
+      src="https://www.popsci.com/uploads/2019/03/18/7PWF2DFYP6NDYPTMN3PUBRSYU4.jpg?auto=webp"
+      alt="cold"
+    />
+    <img
+      src="https://www.treehugger.com/thmb/emVFfdc5Dwzu-u531n2zOSyvkLc=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__mnn__images__2018__07__palm_trees_hot_sun-f8e20b86425b492f9d777d92db46db49.jpg"
+      alt="hot"
+    />
+    <div class="weather-data">
+      <div class="location">Kaliningrad</div>
+      <div class="temperature">{{ 14.4 | number: '1.0-0' }}&deg;C</div>
+    </div>
+  </div>
+  <div class="lower-data">
+    <div class="more-info-label">More information</div>
+    <div class="more-info-container">
+      <div class="info-block">
+        <div class="info-block-label">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/4270/4270872.png"
+            style="width: 70px; height: 70px"
+            alt="temp_low"
+          />
+          <span>min</span>
+          <div class="info-block-value">10&deg;C</div>
+        </div>
+      </div>
+
+      <div class="info-block">
+        <div class="info-block-label">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/1684/1684375.png"
+            style="width: 70px; height: 70px"
+            alt="temp_high"
+          />
+          <span>max</span>
+          <div class="info-block-value">10&deg;C</div>
+        </div>
+      </div>
+
+      <div class="info-block">
+        <div class="info-block-label">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/2903/2903592.png"
+            style="width: 70px; height: 70px"
+            alt="humidity"
+          />
+          <span>humidity </span>
+          <div class="info-block-value">10&deg;C</div>
+        </div>
+      </div>
+
+      <div class="info-block">
+        <div class="info-block-label">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/2903/2903589.png"
+            style="width: 70px; height: 70px"
+            alt="windy"
+          />
+          <span>windy </span>
+          <div class="info-block-value">10&deg;C</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="search">
+  <form #form="ngForm" (submit)="onSubmit()">
+    <input
+      type="text"
+      placeholder="Search city..."
+      name="city"
+      [(ngModel)]="cityName"
+    />
+  </form>
+</div>
+
+<div class="container" *ngIf="weatherData">
+  <div class="upper-data">
+    <img
+      *ngIf="weatherData.main.temp - 273.15 > 15"
+      src="https://www.treehugger.com/thmb/emVFfdc5Dwzu-u531n2zOSyvkLc=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__mnn__images__2018__07__palm_trees_hot_sun-f8e20b86425b492f9d777d92db46db49.jpg"
+      alt="hot"
+      />
+      <img
+      *ngIf="weatherData.main.temp - 273.15
+      <= 15"
+      src="https://www.popsci.com/uploads/2019/03/18/7PWF2DFYP6NDYPTMN3PUBRSYU4.jpg?auto=webp"
+      alt="cold"
+    />
+    <div class="weather-data">
+      <div class="location">{{ weatherData.name }}</div>
+      <div class="temperature">
+        {{ weatherData.main.temp - 273.15 | number: '1.0-0' }}&deg;C
+      </div>
+    </div>
+  </div>
+  <div class="lower-data">
+    <div class="more-info-label">More information</div>
+    <div class="more-info-container">
+      <div class="info-block">
+        <div class="info-block-label">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/4270/4270872.png"
+            style="width: 70px; height: 70px"
+            alt="temp_low"
+          />
+          <span>min</span>
+          <div class="info-block-value">
+            {{ weatherData.main.temp_min - 273.15 | number: '1.0-0' }}&deg;C
+          </div>
+        </div>
+      </div>
+
+      <div class="info-block">
+        <div class="info-block-label">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/1684/1684375.png"
+            style="width: 70px; height: 70px"
+            alt="temp_high"
+          />
+          <span>max</span>
+          <div class="info-block-value">
+            {{ weatherData.main.temp_max - 273.15 | number: '1.0-0' }}&deg;C
+          </div>
+        </div>
+      </div>
+
+      <div class="info-block">
+        <div class="info-block-label">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/2903/2903592.png"
+            style="width: 70px; height: 70px"
+            alt="humidity"
+          />
+          <span>humidity </span>
+          <div class="info-block-value">{{ weatherData.main.humidity }}%</div>
+        </div>
+      </div>
+
+      <div class="info-block">
+        <div class="info-block-label">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/2903/2903589.png"
+            style="width: 70px; height: 70px"
+            alt="windy"
+          />
+          <span>windy </span>
+          <div class="info-block-value">
+            {{ weatherData.wind.speed | number: '1.0-0' }}km/h
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<router-outlet></router-outlet>
